@@ -23,14 +23,14 @@ button {
     height: 50px;
     border: 0px;
     box-shadow: 0 2px 4px rgb(88, 88, 88);
-    background-color: #A7A88A;
+    background-color: #a298b1;
     font-family: 'ZCOOL QingKe HuangYou', cursive;
 }
 
-button:hover {background-color: #B9BAB4}
+button:hover {background-color: #d7cbec}
 
 button:active {
-  background-color: #B9BAB4;
+  background-color: #d7cbec;
   box-shadow: 0 5px #666;
   transform: translateY(1px);
 }
