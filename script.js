@@ -14,13 +14,10 @@ const deleteBtn = document.getElementById('delete')
 const equalBtn = document.getElementById('equal')
 const decimalBtn = document.getElementById('.')
 
-// display
 
 function display(number) {
     displayValue = screen.innerText += number
 }
-
-// clear
 
 function clear() {
     if (result === error) {
@@ -31,8 +28,6 @@ function clear() {
     firstNum = ''
     secondNum = ''
 }
-
-// delete
 
 function del() {
     let string
@@ -56,8 +51,6 @@ function del() {
 
     
 }
-
-// operate
 
 function operate(a, b) {
     if (operationSelection === 'add') {
@@ -108,8 +101,6 @@ operatorBtns.forEach((button) => {
     })
 })
 
-// equal button
-
 equalBtn.addEventListener('click', ()=> {
     if (screen.innerText === '' || result === error) {
         return
@@ -118,8 +109,6 @@ equalBtn.addEventListener('click', ()=> {
     screen.innerText = '' + result
     firstNum === '' + result
 })
-
-// handle decimals
 
 decimalBtn.addEventListener('click', ()=> {
     if (operationSelection === '' && firstNum.indexOf('.') === -1) {

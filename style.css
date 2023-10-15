@@ -1,23 +1,38 @@
 body {
     display: flex;
+    color: #312f2f;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: #E9E6E2;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
 }
 
 #container {
-    border-style: solid;
+    border-style: 0px;
     border-radius: 10px;
     padding: 20px;
+    box-shadow: 0 5px 7px rgb(79, 79, 79);
+    background-color: #4A3F42;
+    
     
 }
 
 button { 
     width: 50px;
     height: 50px;
-    border-radius: 50%;
-    box-shadow: 0 2px 4px darkslategray;
+    border: 0px;
+    box-shadow: 0 2px 4px rgb(88, 88, 88);
+    background-color: #A7A88A;
+    font-family: 'ZCOOL QingKe HuangYou', cursive;
+}
+
+button:hover {background-color: #B9BAB4}
+
+button:active {
+  background-color: #B9BAB4;
+  box-shadow: 0 5px #666;
+  transform: translateY(1px);
 }
 
 #screen {
@@ -26,12 +41,15 @@ button {
     justify-content: right;
     text-align: right;
     height: 40px;
-    border-style: solid;
     border-radius: 10px;
     padding: 10px;
     padding-left: 20px;
     padding-right: 20px;
     margin: 10px;
+    background-color: #E9E6E2;
+    box-shadow: 0 2px 4px rgb(88, 88, 88);
+    letter-spacing: 4px;
+    
 }
 
 tr {
@@ -41,7 +59,3 @@ tr {
     gap: 10px;
 }
 
-#result {
-    font-size: xx-large;
-    margin-top: 10px;
-}
