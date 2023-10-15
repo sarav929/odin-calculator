@@ -3,6 +3,7 @@ let secondNum = ''
 let operationSelection = ''
 let result = 0
 let error = 'LMAO'
+let displayValue = ''
 
 
 const screen = document.getElementById('screen')
@@ -16,7 +17,7 @@ const decimalBtn = document.getElementById('.')
 // display
 
 function display(number) {
-    screen.innerText += number
+    displayValue = screen.innerText += number
 }
 
 // clear
@@ -34,24 +35,42 @@ function clear() {
 // delete
 
 function del() {
-    let subStr = screen.innerText.slice(0, screen.innerText.length - 1)
-    screen.innerText = subStr
+    let string
+    let displayStr 
+    let lastChar = screen.innerText[screen.innerText.length - 1]
+
+    if (lastChar >= 0 || lastChar <= 9) {
+        if (secondNum === '') {
+            string = firstNum.replace(firstNum[firstNum.length - 1], '')
+            firstNum = string
+        } else if (firstNum !== '' && operationSelection !== '') {
+            string = secondNum.replace(secondNum[secondNum.length - 1], '')
+            secondNum = string
+        }
+    } else {
+        return
+    }   
+
+    displayStr = screen.innerText.replace(screen.innerText[screen.innerText.length - 1], '')
+    screen.innerText = displayStr
+
+    
 }
 
 // operate
 
 function operate(a, b) {
     if (operationSelection === 'add') {
-        return result = a + b;
+        return result =  Math.floor((a + b) * 100) / 100;
     } else if (operationSelection === 'subtract') {
-        return result = a - b;
+        return result = Math.floor((a - b) * 100) / 100;
     } else if (operationSelection === 'multiply') {
-        return result = a * b;
+        return result = Math.floor((a * b) * 100) / 100;
     } else if (operationSelection === 'divide') {
         if (b === 0) {
             return result = error
         }
-        return result = a / b;
+        return result = Math.floor((a / b) * 100) / 100;
     } 
 }
 
@@ -103,23 +122,20 @@ equalBtn.addEventListener('click', ()=> {
 // handle decimals
 
 decimalBtn.addEventListener('click', ()=> {
-    if (result !== error) {
-        if (operationSelection === '') {
-            if (firstNum.indexOf('.') === -1) {
-                display(decimalBtn.textContent)
-                firstNum += decimalBtn.textContent
-            }
-        } else {
-            if (secondNum.indexOf('.') === -1) {
-                display(decimalBtn.textContent)
-                secondNum += decimalBtn.textContent
-        }
+    if (operationSelection === '' && firstNum.indexOf('.') === -1) {
+        firstNum += '.'
+        screen.innerText += '.'
+    } else if (operationSelection !== '' && secondNum.indexOf('.') === -1) { 
+        secondNum += '.'
+        screen.innerText += '.'
+    } else {
+        return
     }
-}})
+})
 
 clearBtn.addEventListener('click', clear)
 deleteBtn.addEventListener('click', ()=> {
     if (result !== error) {
-        del
+        del()
     }
 })
