@@ -111,6 +111,13 @@ equalBtn.addEventListener('click', ()=> {
 })
 
 decimalBtn.addEventListener('click', ()=> {
+    if (firstNum === '') {
+        firstNum = '0.'
+        screen.innerText += '0.'
+    } else if (secondNum === '') {
+        secondNum = '0.'
+        screen.innerText += '0.'
+    }
     if (operationSelection === '' && firstNum.indexOf('.') === -1) {
         firstNum += '.'
         screen.innerText += '.'
