@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../odin-calculator/style.css">
+    <script src="../odin-calculator/script.js" defer></script>
     <title>Calculator</title>
 </head>
 <body>
@@ -12,41 +13,43 @@
 
     <div id="container"> 
 
-        <div id="screen">1 + 2</div>
+        <div id="screen">
+    
+        </div>
 
         <div id="buttons">
             <table>
                 <tr>
-                    <th><button>clear</button></th>
-                    <th><button>←</button></th>
+                    <th><button id="clear">clear</button></th>
+                    <th><button id="delete">←</button></th>
                 </tr>
 
                 <tr>
-                    <th><button>9</button></th>
-                    <th><button>8</button></th>
-                    <th><button>7</button></th>
-                    <th><button>÷</button></th>
+                    <th><button class="number" id="9">9</button></th>
+                    <th><button class="number" id="8">8</button></th>
+                    <th><button class="number" id="7">7</button></th>
+                    <th><button class="operator" id="divide">÷</button></th>
                 </tr>
                 
                 <tr>
-                    <th><button>6</button></th>
-                    <th><button>5</button></th>
-                    <th><button>4</button></th>
-                    <th><button>×</button></th>
+                    <th><button class="number" id="6">6</button></th>
+                    <th><button class="number" id="5">5</button></th>
+                    <th><button class="number" id="4">4</button></th>
+                    <th><button class="operator" id="multiply">×</button></th>
                 </tr>
                 
                 <tr>
-                    <th><button>3</button></th>
-                    <th><button>2</button></th>
-                    <th><button>1</button></th>
-                    <th><button>-</button></th>
+                    <th><button class="number" id="3">3</button></th>
+                    <th><button class="number" id="2">2</button></th>
+                    <th><button class="number" id="1">1</button></th>
+                    <th><button class="operator" id="subtract">-</button></th>
                 </tr>
                 
                 <tr>
-                    <th><button>.</button></th>
-                    <th><button>0</button></th>
-                    <th><button>=</button></th>
-                    <th><button>+</button></th>
+                    <th><button id=".">.</button></th>
+                    <th><button class="number" id="0">0</button></th>
+                    <th><button id="equal">=</button></th>
+                    <th><button class="operator" id="add">+</button></th>
                 </tr>
                 
                 

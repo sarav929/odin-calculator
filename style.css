@@ -7,23 +7,35 @@ body {
 
 #container {
     border-style: solid;
-    padding: 10px;
+    border-radius: 10px;
+    padding: 20px;
     
 }
 
 button { 
     width: 50px;
     height: 50px;
+    border-radius: 5px;
 }
 
 #screen {
     text-align: right;
     border-style: solid;
+    border-radius: 10px;
     padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
     margin: 10px;
 }
 
 tr {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    padding: 5px;
+    gap: 10px;
+}
+
+#result {
+    font-size: xx-large;
+    margin-top: 10px;
 }
