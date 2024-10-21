@@ -4,7 +4,8 @@ let operationSelection = ''
 let result = 0
 let error = 'LMAO'
 let displayValue = ''
-
+let operatorSelected = false  
+let resultDisplayed = false   
 
 const screen = document.getElementById('screen')
 const numberBtns = Array.from(document.getElementsByClassName('number'))
@@ -19,42 +20,33 @@ function display(number) {
     displayValue = screen.innerText += number
 }
 
+
 function clear() {
-    if (result === error) {
-        result = 0
-    }
     screen.innerText = ''
-    operationSelection = ''
     firstNum = ''
     secondNum = ''
+    operationSelection = ''
+    result = 0
+    operatorSelected = false
+    resultDisplayed = false
 }
+
 
 function del() {
-    let string
-    let displayStr 
-    let lastChar = screen.innerText[screen.innerText.length - 1]
-
-    if (lastChar >= 0 || lastChar <= 9) {
-        if (secondNum === '') {
-            string = firstNum.replace(firstNum[firstNum.length - 1], '')
-            firstNum = string
-        } else if (firstNum !== '' && operationSelection !== '') {
-            string = secondNum.replace(secondNum[secondNum.length - 1], '')
-            secondNum = string
-        }
-    } else {
-        return
-    }   
-
-    displayStr = screen.innerText.replace(screen.innerText[screen.innerText.length - 1], '')
+    if (resultDisplayed) return
+    let displayStr = screen.innerText.slice(0, -1)
     screen.innerText = displayStr
-
-    
+    if (secondNum === '') {
+        firstNum = firstNum.slice(0, -1)
+    } else {
+        secondNum = secondNum.slice(0, -1)
+    }
 }
+
 
 function operate(a, b) {
     if (operationSelection === 'add') {
-        return result =  Math.floor((a + b) * 100) / 100;
+        return result = Math.floor((a + b) * 100) / 100;
     } else if (operationSelection === 'subtract') {
         return result = Math.floor((a - b) * 100) / 100;
     } else if (operationSelection === 'multiply') {
@@ -64,73 +56,103 @@ function operate(a, b) {
             return result = error
         }
         return result = Math.floor((a / b) * 100) / 100;
-    } 
+    }
 }
 
 
 numberBtns.forEach((button) => {
-    button.addEventListener('click', ()=> {
+    button.addEventListener('click', () => {
+        
+        if (resultDisplayed) return;
+        
         if (result !== error) {
-            display(button.id)
-            if (operationSelection === '') {
+            
+            if (!operatorSelected) {
+                display(button.id)
                 firstNum += button.id
-            } else {
+            } 
+            
+            else {
+                display(button.id)
                 secondNum += button.id
             } 
         } else {
-            clear
-        }                    
-    })
-})
-
-operatorBtns.forEach((button) => {
-    button.addEventListener('click', ()=> {
-        if (result !== error) {
-            if (operationSelection === '') {
-                operationSelection += button.id
-                display(button.textContent)      
-            } else if (secondNum !== '') {
-                result = operate(+firstNum, +secondNum)
-                clear()
-                display(result)
-                operationSelection += button.id
-                display(button.textContent) 
-                firstNum += result            
-            }            
+            clear() 
         }
     })
 })
 
-equalBtn.addEventListener('click', ()=> {
+
+operatorBtns.forEach((button) => {
+    button.addEventListener('click', () => {
+        
+        if (resultDisplayed) {
+            operatorSelected = true
+            operationSelection = button.id
+            display(button.textContent)
+            resultDisplayed = false 
+            return
+        }
+
+        if (result !== error) {
+            if (operationSelection === '') {
+                operationSelection = button.id
+                display(button.textContent)
+                operatorSelected = true  
+            } else if (secondNum !== '') {
+                result = operate(+firstNum, +secondNum)
+                clear()
+                display(result)
+                operationSelection = button.id
+                display(button.textContent)
+                firstNum = '' + result  
+                operatorSelected = true
+            }
+        }
+    })
+})
+
+
+equalBtn.addEventListener('click', () => {
     if (screen.innerText === '' || result === error) {
         return
     }
     result = operate(+firstNum, +secondNum)
     screen.innerText = '' + result
-    firstNum === '' + result
+    firstNum = '' + result  
+    secondNum = ''  
+    operatorSelected = false
+    resultDisplayed = true 
 })
 
-decimalBtn.addEventListener('click', ()=> {
-    if (firstNum === '') {
-        firstNum = '0.'
-        screen.innerText += '0.'
-    } else if (secondNum === '') {
-        secondNum = '0.'
-        screen.innerText += '0.'
-    }
-    if (operationSelection === '' && firstNum.indexOf('.') === -1) {
-        firstNum += '.'
-        screen.innerText += '.'
-    } else if (operationSelection !== '' && secondNum.indexOf('.') === -1) { 
-        secondNum += '.'
-        screen.innerText += '.'
-    } else {
-        return
+
+decimalBtn.addEventListener('click', () => {
+    if (resultDisplayed) return;  
+
+    if (!operatorSelected && firstNum.indexOf('.') === -1) {
+        if (firstNum === '') {
+            firstNum = '0.'
+            screen.innerText += '0.'
+        } else {
+            firstNum += '.'
+            screen.innerText += '.'
+        }
+    } else if (operatorSelected && secondNum.indexOf('.') === -1) { 
+        if (secondNum === '') {
+            secondNum = '0.'
+            screen.innerText += '0.'
+        } else {
+            secondNum += '.'
+            screen.innerText += '.'
+        }
     }
 })
+
 
 clearBtn.addEventListener('click', clear)
-deleteBtn.addEventListener('click', ()=> {
+
+
+deleteBtn.addEventListener('click', () => {
     if (result !== error) {
         del()
     }
