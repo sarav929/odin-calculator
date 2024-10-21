@@ -78,7 +78,7 @@ numberBtns.forEach((button) => {
                 secondNum += button.id
             } 
         } else {
-            clear
+            clear()
         }                    
     })
 })
@@ -110,22 +110,23 @@ equalBtn.addEventListener('click', ()=> {
     firstNum === '' + result
 })
 
-decimalBtn.addEventListener('click', ()=> {
-    if (firstNum === '') {
-        firstNum = '0.'
-        screen.innerText += '0.'
-    } else if (secondNum === '') {
-        secondNum = '0.'
-        screen.innerText += '0.'
-    }
+decimalBtn.addEventListener('click', () => {
     if (operationSelection === '' && firstNum.indexOf('.') === -1) {
-        firstNum += '.'
-        screen.innerText += '.'
+        if (firstNum === '') {
+            firstNum = '0.'
+            screen.innerText += '0.'
+        } else {
+            firstNum += '.'
+            screen.innerText += '.'
+        }
     } else if (operationSelection !== '' && secondNum.indexOf('.') === -1) { 
-        secondNum += '.'
-        screen.innerText += '.'
-    } else {
-        return
+        if (secondNum === '') {
+            secondNum = '0.'
+            screen.innerText += '0.'
+        } else {
+            secondNum += '.'
+            screen.innerText += '.'
+        }
     }
 })
 
