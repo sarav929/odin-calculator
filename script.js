@@ -34,17 +34,13 @@ function del() {
     let displayStr 
     let lastChar = screen.innerText[screen.innerText.length - 1]
 
-    if (lastChar >= 0 || lastChar <= 9) {
-        if (secondNum === '') {
-            string = firstNum.replace(firstNum[firstNum.length - 1], '')
-            firstNum = string
-        } else if (firstNum !== '' && operationSelection !== '') {
-            string = secondNum.replace(secondNum[secondNum.length - 1], '')
-            secondNum = string
-        }
-    } else {
-        return
-    }   
+    if (secondNum === '') {
+        string = firstNum.replace(firstNum[firstNum.length - 1], '')
+        firstNum = string
+    } else if (firstNum !== '' && operationSelection !== '') {
+        string = secondNum.replace(secondNum[secondNum.length - 1], '')
+        secondNum = string
+    }  
 
     displayStr = screen.innerText.replace(screen.innerText[screen.innerText.length - 1], '')
     screen.innerText = displayStr
@@ -107,7 +103,8 @@ equalBtn.addEventListener('click', ()=> {
     }
     result = operate(+firstNum, +secondNum)
     screen.innerText = '' + result
-    firstNum === '' + result
+    firstNum = '' + result
+    secondNum = ''
 })
 
 decimalBtn.addEventListener('click', () => {
